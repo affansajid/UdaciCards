@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "sdkVersion": "21.0.0",
+    "orientation": "portrait",
+    "name": "UdaciCards",
+    "description": "Learn on the go with flashcards!",
+    "slug": "udacicards",
+    "version": "1.0",
+    "icon": "./assets/udacicards_logo_512.png",
+    "notification": {
+      "icon": "./assets/udacicards_logo_48.png"
+    },
+    "ios": {
+     "bundleIdentifier": "com.affansajid.udacicards",
+    },
+    "android": {
+     "package": "com.affansajid.udacicards",
+    }
+  },
+}
