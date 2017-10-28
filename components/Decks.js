@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { white, black, gray, lightGray } from '../utils/colors';
+import DeckView from './DeckView';
 
 export default class Decks extends Component {
 
@@ -87,7 +88,10 @@ export default class Decks extends Component {
 
         return (
           <View key={deck} style={styles.item}>
-            <TouchableOpacity style={styles.card}>
+            <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate(
+    					'DeckView',
+    					{ deckId: deck }
+    				)}>
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.card_count}>{questions.length} {questions.length === 1 ? 'card' : 'cards'}</Text>
             </TouchableOpacity>

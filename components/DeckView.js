@@ -3,6 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { white, black, gray, lightGray } from '../utils/colors';
 
 export default class DeckView extends Component {
+  static navigationOptions = ({ navigation }) => {
+		const { deckId } = navigation.state.params
+
+		return {
+			title: deckId
+		}
+	}
 
   render() {
     return (
