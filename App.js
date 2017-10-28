@@ -18,7 +18,7 @@ const Tabs = TabNavigator({
   NewDeck: {
     screen: NewDeck,
     navigationOptions: {
-      tabBarLabel: 'New Decks',
+      tabBarLabel: 'New Deck',
       tabBarIcon: ({ tintColor }) => <Ionicons name="ios-add-circle" size={30} color={tintColor} />
     }
   }
