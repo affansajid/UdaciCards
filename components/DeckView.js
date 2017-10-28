@@ -4,18 +4,20 @@ import { white, black, gray, lightGray } from '../utils/colors';
 
 export default class DeckView extends Component {
   static navigationOptions = ({ navigation }) => {
-		const { deckId } = navigation.state.params
+		const { title } = navigation.state.params
 
 		return {
-			title: deckId
+			title
 		}
 	}
 
   render() {
+    const { deckId, title, questions } = this.props.navigation.state.params
+
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Deck Title</Text>
-        <Text style={styles.card_count}>0 Cards</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.card_count}>{questions.length} {questions.length === 1 ? 'card' : 'cards'}</Text>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Add Card</Text>
         </TouchableOpacity>

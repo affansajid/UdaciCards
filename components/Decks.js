@@ -90,7 +90,7 @@ export default class Decks extends Component {
           <View key={deck} style={styles.item}>
             <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate(
     					'DeckView',
-    					{ deckId: deck }
+    					{ deckId: deck, title, questions }
     				)}>
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.card_count}>{questions.length} {questions.length === 1 ? 'card' : 'cards'}</Text>
