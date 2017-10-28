@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { white, black, gray, lightGray } from '../utils/colors';
+import NewQuestion from './NewQuestion';
 
 export default class DeckView extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -18,7 +19,10 @@ export default class DeckView extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.card_count}>{questions.length} {questions.length === 1 ? 'card' : 'cards'}</Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate(
+          'NewQuestion',
+          { deckId, title }
+        )}>
           <Text style={styles.buttonText}>Add Card</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonDark}>

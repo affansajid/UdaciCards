@@ -7,6 +7,7 @@ import { black, green, white, orange, gray } from './utils/colors';
 import { Constants } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import DeckView from './components/DeckView';
+import NewQuestion from './components/NewQuestion';
 
 const Tabs = TabNavigator({
   Decks: {
@@ -47,6 +48,16 @@ const MainNavigator = StackNavigator({
 	},
   DeckView: {
     screen: DeckView,
+    navigationOptions: {
+			headerTintColor: white,
+			headerStyle: {
+				backgroundColor: black,
+			}
+
+		}
+  },
+  NewQuestion: {
+    screen: NewQuestion,
     navigationOptions: {
 			headerTintColor: white,
 			headerStyle: {
