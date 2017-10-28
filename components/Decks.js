@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import { white, black, gray } from '../utils/colors';
+import { white, black, gray, lightGray } from '../utils/colors';
 
 export default class Decks extends Component {
 
@@ -99,7 +99,8 @@ export default class Decks extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 20
+    marginBottom: 20,
+    backgroundColor: lightGray
   },
   item: {
 		marginLeft: 10,
