@@ -1,13 +1,66 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+import Decks from './components/Decks';
+import NewDeck from './components/NewDeck';
+import { black, green, white, orange, gray } from './utils/colors';
+import { Constants } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 
-export default class App extends React.Component {
+const Tabs = TabNavigator({
+  Decks: {
+    screen: Decks,
+    navigationOptions: {
+      tabBarLabel: 'Decks',
+      tabBarIcon: ({ tintColor }) => <Ionicons name="ios-list-box" size={30} color={tintColor} />
+    }
+  },
+  NewDeck: {
+    screen: NewDeck,
+    navigationOptions: {
+      tabBarLabel: 'New Decks',
+      tabBarIcon: ({ tintColor }) => <Ionicons name="ios-add-circle" size={30} color={tintColor} />
+    }
+  }
+}, {
+	navigationOptions: {
+		header: null
+	},
+	tabBarOptions: {
+		activeTintColor: black,
+    inactiveTintColor: gray,
+    indicatorStyle: {
+      backgroundColor: orange,
+      height: 5
+    },
+		style: {
+			height: 56,
+      backgroundColor: white
+		}
+	}
+})
+
+const MainNavigator = StackNavigator({
+	Home: {
+		screen: Tabs
+	}
+})
+
+function AppStatusBar ({ backgroundColor, ...props }) {
+	return (
+		<View style={{ backgroundColor, height: Constants.statusBarHeight}}>
+			<StatusBar translucent backgroundColor={backgroundColor} {...props} />
+		</View>
+	)
+}
+
+export default class App extends Component {
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <AppStatusBar backgroundColor={black} barStyle='light-content' />
+        <MainNavigator />
       </View>
     );
   }
@@ -15,9 +68,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1
   },
 });
