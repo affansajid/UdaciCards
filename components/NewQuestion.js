@@ -73,10 +73,12 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     borderRadius: 5,
     backgroundColor: black,
-    marginTop: 10
+    marginTop: 10,
+    width: 200
   },
   buttonTextLight: {
     fontSize: 16,
-    color: white
+    color: white,
+    textAlign: 'center'
   }
 });

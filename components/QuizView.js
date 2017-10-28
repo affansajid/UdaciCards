@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { white, black, gray, lightGray } from '../utils/colors';
-import NewQuestion from './NewQuestion';
-import QuizView from './QuizView';
+import { white, black, gray, green, red } from '../utils/colors';
 
-export default class DeckView extends Component {
+export default class QuizView extends Component {
   static navigationOptions = ({ navigation }) => {
 		const { title } = navigation.state.params
 
 		return {
-			title
+			title: `Quiz on ${title}`
 		}
 	}
 
@@ -19,18 +17,12 @@ export default class DeckView extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.card_count}>{questions.length} {questions.length === 1 ? 'card' : 'cards'}</Text>
-        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate(
-          'NewQuestion',
-          { deckId, title }
-        )}>
-          <Text style={styles.buttonText}>Add Card</Text>
+
+        <TouchableOpacity style={styles.buttonCorrect}>
+          <Text style={styles.buttonTextLight}>Correct</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.navigate(
-          'QuizView',
-          { deckId, title, questions }
-        )}>
-          <Text style={styles.buttonTextLight}>Start Quiz</Text>
+        <TouchableOpacity style={styles.buttonIncorrect}>
+          <Text style={styles.buttonTextLight}>Incorrect</Text>
         </TouchableOpacity>
       </View>
     )
@@ -55,34 +47,29 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
-  button: {
+  buttonCorrect: {
     borderWidth: 1,
-    borderColor: black,
+    borderColor: green,
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
     borderRadius: 5,
-    backgroundColor: white,
+    backgroundColor: green,
     marginTop: 10,
     width: 200
   },
-  buttonDark: {
+  buttonIncorrect: {
     borderWidth: 1,
-    borderColor: black,
+    borderColor: red,
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
     borderRadius: 5,
-    backgroundColor: black,
+    backgroundColor: red,
     marginTop: 10,
     width: 200
-  },
-  buttonText: {
-    fontSize: 16,
-    color: black,
-    textAlign: 'center'
   },
   buttonTextLight: {
     fontSize: 16,

@@ -8,6 +8,7 @@ import { Constants } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import DeckView from './components/DeckView';
 import NewQuestion from './components/NewQuestion';
+import QuizView from './components/QuizView';
 
 const Tabs = TabNavigator({
   Decks: {
@@ -58,6 +59,16 @@ const MainNavigator = StackNavigator({
   },
   NewQuestion: {
     screen: NewQuestion,
+    navigationOptions: {
+			headerTintColor: white,
+			headerStyle: {
+				backgroundColor: black,
+			}
+
+		}
+  },
+  QuizView: {
+    screen: QuizView,
     navigationOptions: {
 			headerTintColor: white,
 			headerStyle: {

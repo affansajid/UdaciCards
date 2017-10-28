@@ -57,10 +57,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     borderRadius: 5,
-    backgroundColor: white
+    backgroundColor: white,
+    width: 200
   },
   buttonText: {
     fontSize: 16,
-    color: black
+    color: black,
+    textAlign: 'center'
   }
 });
