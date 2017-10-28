@@ -6,6 +6,7 @@ import NewDeck from './components/NewDeck';
 import { black, green, white, orange, gray } from './utils/colors';
 import { Constants } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
+import DeckView from './components/DeckView';
 
 const Tabs = TabNavigator({
   Decks: {
@@ -43,7 +44,10 @@ const Tabs = TabNavigator({
 const MainNavigator = StackNavigator({
 	Home: {
 		screen: Tabs
-	}
+	},
+  DeckView: {
+    screen: DeckView
+  }
 })
 
 function AppStatusBar ({ backgroundColor, ...props }) {
