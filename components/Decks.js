@@ -81,12 +81,15 @@ export default class Decks extends Component {
 
     return (
       <ScrollView style={styles.container}>
-      {Object.values(decks).map((deck) => {
+      {Object.keys(decks).map((deck) => {
+
+        const { title, questions } = decks[deck]
+
         return (
-          <View key={deck.title} style={styles.item}>
+          <View key={deck} style={styles.item}>
             <TouchableOpacity style={styles.card}>
-              <Text style={styles.title}>{deck.title}</Text>
-              <Text style={styles.card_count}>{deck.questions.length} {deck.questions.length === 1 ? 'card' : 'cards'}</Text>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.card_count}>{questions.length} {questions.length === 1 ? 'card' : 'cards'}</Text>
             </TouchableOpacity>
           </View>
         )
