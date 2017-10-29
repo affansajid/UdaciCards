@@ -12,7 +12,6 @@ export default class Decks extends Component {
 
   componentWillMount() {
     getDecks()
-    //.then((results) => this.setState({ decks: results['decks'] }))
     .then((results) => {
       const decks = results['decks']
       this.setState({ decks })
@@ -20,7 +19,6 @@ export default class Decks extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
 
     if (nextProps.navigation.state.params !== null && nextProps.navigation.state.params.updated !== null) {
       getDecks()
@@ -34,39 +32,46 @@ export default class Decks extends Component {
     }
   }
 
-  // componentWillUnmount() {
-  //   console.log('Unmounting :(')
-  // }
-  //
-  // shouldComponentUpdate(nextProps) {
-  //
-  //   return nextProps.navigation.state.params !== null
-	// }
-
   render() {
 
     const { decks } = this.state
 
-    return (
-      <ScrollView style={styles.container}>
-      {Object.keys(decks).map((deck) => {
-
-        const { title, questions } = decks[deck]
-
-        return (
-          <View key={deck} style={styles.item}>
-            <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate(
-    					'DeckView',
-    					{ deckId: deck, title, questions }
-    				)}>
-              <Text style={styles.title}>{title}</Text>
-              <Text style={styles.card_count}>{questions.length} {questions.length === 1 ? 'card' : 'cards'}</Text>
-            </TouchableOpacity>
+    if (Object.keys(decks).length === 0) {
+      return (
+          <View style={styles.container}>
+            <View style={styles.item}>
+              <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate(
+                'NewDeck'
+              )}>
+                <Text style={{textAlign: 'center'}}>No Decks Available.{"\n"} Click Me To Add One 😀!</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )
-      })}
-      </ScrollView>
-    )
+    }
+    else {
+      return (
+          <ScrollView style={styles.container}>
+          {Object.keys(decks).map((deck) => {
+
+            const { title, questions } = decks[deck]
+
+            return (
+              <View key={deck} style={styles.item}>
+                <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate(
+        					'DeckView',
+        					{ deckId: deck, title, questions }
+        				)}>
+                  <Text style={styles.title}>{title}</Text>
+                  <Text style={styles.card_count}>{questions.length} {questions.length === 1 ? 'card' : 'cards'}</Text>
+                </TouchableOpacity>
+              </View>
+            )
+          })}
+          </ScrollView>
+      )
+    }
+
   }
 }
 
