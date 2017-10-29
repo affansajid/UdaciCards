@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
 import { white, black, gray, lightGray } from '../utils/colors';
 
 export default class NewQuestion extends Component {
@@ -19,7 +19,7 @@ export default class NewQuestion extends Component {
     const { deckId, title } = this.props.navigation.state.params
 
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text style={styles.title}>Add card to {title}</Text>
         <TextInput
           style={styles.textInput}
@@ -36,8 +36,7 @@ export default class NewQuestion extends Component {
         <TouchableOpacity style={styles.buttonDark}>
           <Text style={styles.buttonTextLight}>Submit</Text>
         </TouchableOpacity>
-        <View style={{ height: 40 }} />
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
