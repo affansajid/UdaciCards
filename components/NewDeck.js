@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
 import { white, black, gray, lightGray } from '../utils/colors';
+import { saveDeckTitle } from '../utils/api';
+import { NavigationActions } from 'react-navigation';
 
 export default class NewDeck extends Component {
 
   state = {
     deck_title: ''
   }
+
+  addDeck = () => {
+    const { deck_title } = this.state
+
+    if (deck_title !== '') {
+      saveDeckTitle(deck_title)
+      this.toHome()
+    }
+  }
+
+  toHome = () => {
+		// this.props.navigation.dispatch(NavigationActions.back({
+		// 	key: 'Decks'
+		// }))
+
+    this.props.navigation.navigate(
+      'Decks', { update: 'yes' }
+    )
+	}
 
   render() {
     return (
@@ -18,7 +39,7 @@ export default class NewDeck extends Component {
           value={this.state.text}
           placeholder="Title"
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => this.addDeck()}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

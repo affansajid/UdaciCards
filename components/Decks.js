@@ -14,15 +14,34 @@ export default class Decks extends Component {
     getDecks()
     //.then((results) => this.setState({ decks: results['decks'] }))
     .then((results) => {
-      const decks = JSON.parse(results)['decks']
+      const decks = results['decks']
       this.setState({ decks })
     })
-
-
-    // this.setState({
-    //   decks: results['decks']
-    // })
   }
+
+  componentWillReceiveProps(nextProps) {
+
+
+    if (nextProps.navigation.state.params !== null && nextProps.navigation.state.params.updated !== null) {
+      getDecks()
+      .then((results) => {
+        const decks = results['decks']
+        this.setState({ decks })
+      })
+    }
+    else {
+      return false
+    }
+  }
+
+  // componentWillUnmount() {
+  //   console.log('Unmounting :(')
+  // }
+  //
+  // shouldComponentUpdate(nextProps) {
+  //
+  //   return nextProps.navigation.state.params !== null
+	// }
 
   render() {
 

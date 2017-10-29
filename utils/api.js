@@ -50,12 +50,34 @@ function setDefaultData () {
 }
 
 function formatResults(results) {
+  
   return results === null
     ? setDefaultData()
-    : results
+    : JSON.parse(results)
 }
 
 export function getDecks () {
   return AsyncStorage.getItem(STORAGE_KEY)
   .then(formatResults)
+}
+
+export function saveDeckTitle (deck_title) {
+
+  const deck_id = deck_title
+  .toString()
+  .toLowerCase()
+  .replace(/\s+/g, '_')
+  .replace(/[^\w\-]+/g, '')
+  .replace(/\-\-+/g, '_')
+  .replace(/^-+/, '')
+  .replace(/-+$/, '');
+
+  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
+    decks: {
+      [deck_id]: {
+        title: deck_title,
+        questions: []
+      }
+    }
+	}))
 }
