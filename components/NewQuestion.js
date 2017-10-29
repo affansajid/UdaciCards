@@ -25,6 +25,10 @@ export default class NewQuestion extends Component {
         question,
         answer
       })
+      .then(() => this.setState({
+        question: '',
+        answer: ''
+      }))      
       .then(() => this.toHome())
     }
   }
@@ -44,13 +48,13 @@ export default class NewQuestion extends Component {
         <TextInput
           style={styles.textInput}
           onChangeText={(text) => this.setState({question: text})}
-          value={this.state.text}
+          value={this.state.question}
           placeholder="Question"
         />
         <TextInput
           style={styles.textInput}
           onChangeText={(text) => this.setState({answer: text})}
-          value={this.state.text}
+          value={this.state.answer}
           placeholder="Answer"
         />
         <TouchableOpacity style={styles.buttonDark} onPress={() => this.addCard()}>

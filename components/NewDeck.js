@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
 import { white, black, gray, lightGray } from '../utils/colors';
 import { saveDeckTitle } from '../utils/api';
-import { NavigationActions } from 'react-navigation';
 
 export default class NewDeck extends Component {
 
@@ -15,15 +14,12 @@ export default class NewDeck extends Component {
 
     if (deck_title !== '') {
       saveDeckTitle(deck_title)
-      this.toHome()
+      .then(() => this.setState({deck_title: ''}))
+      .then(() => this.toHome())
     }
   }
 
   toHome = () => {
-		// this.props.navigation.dispatch(NavigationActions.back({
-		// 	key: 'Decks'
-		// }))
-
     this.props.navigation.navigate(
       'Decks', { update: 'yes' }
     )
@@ -36,7 +32,7 @@ export default class NewDeck extends Component {
         <TextInput
           style={styles.textInput}
           onChangeText={(text) => this.setState({deck_title: text})}
-          value={this.state.text}
+          value={this.state.deck_title}
           placeholder="Title"
         />
         <TouchableOpacity style={styles.button} onPress={() => this.addDeck()}>

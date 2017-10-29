@@ -19,7 +19,6 @@ export default class QuizView extends Component {
   }
 
   componentWillUnmount() {
-    console.log('Unmounting')
     this.setState({
       count: 0,
       flipped: 'no',
