@@ -26,6 +26,18 @@ export default class QuizView extends Component {
     })
   }
 
+  restartQuiz() {
+    this.setState({
+      count: 0,
+      flipped: 'no',
+      correct: 0
+    })
+  }
+
+  backToDeck() {
+    this.props.navigation.goBack()
+  }
+
   toggleCard = () => {
     const flipVar = (this.state.flipped === 'no' ? 'yes' : 'no')
 
@@ -62,6 +74,14 @@ export default class QuizView extends Component {
           <Text style={styles.text}>Here is your percentage score</Text>
           <Text style={styles.text}>You got {correct} of {questions.length} correct</Text>
           <Text style={styles.percentage}>{((correct/questions.length) * 100).toFixed(0)}%</Text>
+
+          <TouchableOpacity style={styles.buttonDark} onPress={() => this.restartQuiz()}>
+            <Text style={styles.buttonTextLight}>Restart Quiz</Text>
+          </TouchableOpacity>  
+
+          <TouchableOpacity style={styles.buttonDark} onPress={() => this.backToDeck()}>
+            <Text style={styles.buttonTextLight}>Back To Deck</Text>
+          </TouchableOpacity>
         </View>
       )
     }
