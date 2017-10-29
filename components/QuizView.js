@@ -14,28 +14,59 @@ export default class QuizView extends Component {
 
   state = {
     count: 0,
-    flipped: 'no'
+    flipped: 'no',
+    correct: 0
   }
 
   componentWillUnmount() {
     console.log('Unmounting')
+    this.setState({
+      count: 0,
+      flipped: 'no',
+      correct: 0
+    })
   }
 
   toggleCard = () => {
     const flipVar = (this.state.flipped === 'no' ? 'yes' : 'no')
-    console.log(flipVar)
-
 
     this.setState({
       flipped: flipVar
     })
   }
 
+  nextQuestion = (answer) => {
+    const currentCount = this.state.count
+    const currentCorrect = this.state.correct
+
+    if (answer === 'correct') {
+      this.setState({
+        count: currentCount + 1,
+        correct: currentCorrect + 1
+      })
+    }
+    else {
+      this.setState({
+        count: currentCount + 1
+      })
+    }
+  }
+
   render() {
     const { deckId, title, questions } = this.props.navigation.state.params
-    const { count, flipped } = this.state
+    const { count, flipped, correct } = this.state
 
-    if (questions.length >= 1) {
+    if (count === questions.length) {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.title}>Quiz Complete</Text>
+          <Text style={styles.text}>Here is your percentage score</Text>
+          <Text style={styles.text}>You got {correct} of {questions.length} correct</Text>
+          <Text style={styles.percentage}>{((correct/questions.length) * 100).toFixed(0)}%</Text>
+        </View>
+      )
+    }
+    else if (questions.length >= 1) {
       return (
         <View style={styles.container}>
           <Text style={styles.count}>{count + 1} / {questions.length}</Text>
@@ -53,10 +84,10 @@ export default class QuizView extends Component {
           </TouchableOpacity>
           }
 
-          <TouchableOpacity style={styles.buttonCorrect}>
+          <TouchableOpacity style={styles.buttonCorrect} onPress={() => this.nextQuestion('correct')}>
             <Text style={styles.buttonTextLight}>Correct</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonIncorrect}>
+          <TouchableOpacity style={styles.buttonIncorrect} onPress={() => this.nextQuestion('incorrect')}>
             <Text style={styles.buttonTextLight}>Incorrect</Text>
           </TouchableOpacity>
         </View>
@@ -112,6 +143,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     left: 10
+  },
+  text: {
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  percentage: {
+    textAlign: 'center',
+    fontSize: 32,
+    margin: 10
   },
   buttonDark: {
     borderWidth: 1,
