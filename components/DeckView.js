@@ -26,12 +26,14 @@ export default class DeckView extends Component {
         )}>
           <Text style={styles.buttonText}>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.navigate(
-          'QuizView',
-          { deckId, title, questions }
-        )}>
-          <Text style={styles.buttonTextLight}>Start Quiz</Text>
-        </TouchableOpacity>
+        {questions.length >= 1 &&
+          <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.navigate(
+            'QuizView',
+            { deckId, title, questions }
+          )}>
+            <Text style={styles.buttonTextLight}>Start Quiz</Text>
+          </TouchableOpacity>
+        }
       </View>
     )
   }
