@@ -48,4 +48,12 @@ Like `npm start`, but also attempts to open your app in the iOS Simulator if you
 
 #### `npm run android`
 
-Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). 
+Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup).
+
+
+### Platforms Tested
+  #### Android
+  Samsung Galaxy S7 (Android 7.0) with Expo App
+
+  #### iOS
+  iPhone 5s (iOS 11.0.3) with Expo App
