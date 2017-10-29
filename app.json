@@ -3,7 +3,6 @@
     "sdkVersion": "21.0.0",
     "orientation": "portrait",
     "name": "UdaciCards",
-    "author": "Affan Sajid",
     "description": "Learn on the go with flashcards!",
     "slug": "udacicards",
     "version": "1.0",

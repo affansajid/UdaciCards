@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import DeckView from './components/DeckView';
 import NewQuestion from './components/NewQuestion';
 import QuizView from './components/QuizView';
+import { setLocalNotification } from './utils/helpers';
 
 const Tabs = TabNavigator({
   Decks: {
@@ -88,6 +89,10 @@ function AppStatusBar ({ backgroundColor, ...props }) {
 }
 
 export default class App extends Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
 
   render() {
     return (

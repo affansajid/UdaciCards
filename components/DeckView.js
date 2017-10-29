@@ -13,6 +13,13 @@ export default class DeckView extends Component {
 		}
 	}
 
+  toQuiz(deckId, title) {
+    this.props.navigation.navigate(
+      'NewQuestion',
+      { deckId, title }
+    )
+  }
+
   render() {
     const { deckId, title, questions } = this.props.navigation.state.params
 
@@ -20,10 +27,7 @@ export default class DeckView extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.card_count}>{questions.length} {questions.length === 1 ? 'card' : 'cards'}</Text>
-        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate(
-          'NewQuestion',
-          { deckId, title }
-        )}>
+        <TouchableOpacity style={styles.button} onPress={() => this.toQuiz(deckId, title)}>
           <Text style={styles.buttonText}>Add Card</Text>
         </TouchableOpacity>
         {questions.length >= 1 &&

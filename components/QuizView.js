@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { white, black, gray, green, red } from '../utils/colors';
 import NewQuestion from './NewQuestion';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 export default class QuizView extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -19,6 +20,8 @@ export default class QuizView extends Component {
   }
 
   componentWillUnmount() {
+    clearLocalNotification()
+    .then(setLocalNotification)       
     this.setState({
       count: 0,
       flipped: 'no',
@@ -77,7 +80,7 @@ export default class QuizView extends Component {
 
           <TouchableOpacity style={styles.buttonDark} onPress={() => this.restartQuiz()}>
             <Text style={styles.buttonTextLight}>Restart Quiz</Text>
-          </TouchableOpacity>  
+          </TouchableOpacity>
 
           <TouchableOpacity style={styles.buttonDark} onPress={() => this.backToDeck()}>
             <Text style={styles.buttonTextLight}>Back To Deck</Text>
