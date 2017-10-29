@@ -2,78 +2,27 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { white, black, gray, lightGray } from '../utils/colors';
 import DeckView from './DeckView';
+import { getDecks } from '../utils/api';
 
 export default class Decks extends Component {
 
   state = {
-    decks: {
-      React: {
-        title: 'React',
-        questions: [
-          {
-            question: 'What is React?',
-            answer: 'A library for managing user interfaces'
-          },
-          {
-            question: 'Where do you make Ajax requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          },
-          {
-            question: 'Where do you make Api requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          }
-        ]
-      },
-      JavaScript: {
-        title: 'JavaScript',
-        questions: []
-      },
-      Redux: {
-        title: 'Redux',
-        questions: [
-          {
-            question: 'What is React?',
-            answer: 'A library for managing user interfaces'
-          },
-          {
-            question: 'Where do you make Ajax requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          }
-        ]
-      },
-      Hello: {
-        title: 'Hello',
-        questions: [
-          {
-            question: 'What is a closure?',
-            answer: 'The combination of a function and the lexical environment within which that function was declared.'
-          }
-        ]
-      },
-      Apple: {
-        title: 'Apple',
-        questions: [
-          {
-            question: 'What is React?',
-            answer: 'A library for managing user interfaces'
-          },
-          {
-            question: 'Where do you make Ajax requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          }
-        ]
-      },
-      Orange: {
-        title: 'Orange',
-        questions: [
-          {
-            question: 'What is a closure?',
-            answer: 'The combination of a function and the lexical environment within which that function was declared.'
-          }
-        ]
-      }
-    }
-}
+    decks: {}
+  }
+
+  componentWillMount() {
+    getDecks()
+    //.then((results) => this.setState({ decks: results['decks'] }))
+    .then((results) => {
+      const decks = JSON.parse(results)['decks']
+      this.setState({ decks })
+    })
+
+
+    // this.setState({
+    //   decks: results['decks']
+    // })
+  }
 
   render() {
 
