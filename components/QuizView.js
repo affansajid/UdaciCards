@@ -12,18 +12,46 @@ export default class QuizView extends Component {
 		}
 	}
 
+  state = {
+    count: 0,
+    flipped: 'no'
+  }
+
   componentWillUnmount() {
     console.log('Unmounting')
   }
 
+  toggleCard = () => {
+    const flipVar = (this.state.flipped === 'no' ? 'yes' : 'no')
+    console.log(flipVar)
+
+
+    this.setState({
+      flipped: flipVar
+    })
+  }
 
   render() {
     const { deckId, title, questions } = this.props.navigation.state.params
+    const { count, flipped } = this.state
 
     if (questions.length >= 1) {
       return (
         <View style={styles.container}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.count}>{count + 1} / {questions.length}</Text>
+
+          {flipped === 'no' &&
+          <TouchableOpacity style={styles.questionCard} onPress={this.toggleCard}>
+              <Text style={styles.question}>{questions[count].question}</Text>
+              <Text style={styles.flipButton}>Answer</Text>
+          </TouchableOpacity>
+          }
+          {flipped === 'yes' &&
+          <TouchableOpacity style={styles.questionCard} onPress={this.toggleCard}>
+              <Text style={styles.question}>{questions[count].answer}</Text>
+              <Text style={styles.flipButton}>Question</Text>
+          </TouchableOpacity>
+          }
 
           <TouchableOpacity style={styles.buttonCorrect}>
             <Text style={styles.buttonTextLight}>Correct</Text>
@@ -65,10 +93,25 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: 'center'
   },
-  card_count: {
+  question: {
+    fontSize: 32,
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  questionCard: {
+    padding: 10
+  },
+  flipButton: {
+    textAlign: 'center',
+    color: red,
+    marginTop: 10
+  },
+  count: {
     color: gray,
     fontSize: 20,
-    textAlign: 'center',
+    position: 'absolute',
+    top: 10,
+    left: 10
   },
   buttonDark: {
     borderWidth: 1,
