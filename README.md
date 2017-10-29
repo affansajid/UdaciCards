@@ -1,9 +1,13 @@
 # UdaciCards
+![UdaciCards Logo](/assets/udacicards_logo_48.png)
 
 Author: Affan Sajid
+
 React Native Project for Udacity React Nanodegree
-![UdaciCards Logo](/assets/udacicards_logo_48.png)
-![UdaciCards Image 1](/assets/image1.png)
+
+### ScreenShots
+
+![UdaciCards Image 1](/assets/Image1.png)
 ![UdaciCards Image 2](/assets/Image2.png)
 ![UdaciCards Image 3](/assets/Image3.png)
 ![UdaciCards Image 4](/assets/Image4.png)
