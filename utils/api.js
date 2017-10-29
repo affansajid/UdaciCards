@@ -5,42 +5,7 @@ export const STORAGE_KEY = 'UdaciCards:key';
 function setDefaultData () {
 
   let defaultData = {
-    decks: {
-      React: {
-        title: 'React',
-        questions: [
-          {
-            question: 'What is React?',
-            answer: 'A library for managing user interfaces'
-          },
-          {
-            question: 'Where do you make Ajax requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          },
-          {
-            question: 'Where do you make Api requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          }
-        ]
-      },
-      JavaScript: {
-        title: 'JavaScript',
-        questions: []
-      },
-      Redux: {
-        title: 'Redux',
-        questions: [
-          {
-            question: 'What is React?',
-            answer: 'A library for managing user interfaces'
-          },
-          {
-            question: 'Where do you make Ajax requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          }
-        ]
-      }
-    }
+    decks: {}
   }
 
 
@@ -50,7 +15,7 @@ function setDefaultData () {
 }
 
 function formatResults(results) {
-  
+
   return results === null
     ? setDefaultData()
     : JSON.parse(results)
@@ -80,4 +45,28 @@ export function saveDeckTitle (deck_title) {
       }
     }
 	}))
+}
+
+export function addCardToDeck (deck_id, card) {
+
+  return AsyncStorage.getItem(STORAGE_KEY)
+  .then((results) => {
+    const decks = JSON.parse(results)['decks']
+
+    const all_questions = decks[deck_id]['questions']
+    const title = decks[deck_id]['title']
+
+    return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
+      decks: {
+        [deck_id]: {
+          title: title,
+          questions: [...all_questions, {
+            question: card.question,
+            answer: card.answer
+          }]
+        }
+      }
+  	}))
+  })
+
 }

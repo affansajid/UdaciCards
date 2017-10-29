@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
 import { white, black, gray, lightGray } from '../utils/colors';
+import { addCardToDeck } from '../utils/api';
 
 export default class NewQuestion extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -14,6 +15,25 @@ export default class NewQuestion extends Component {
     question: '',
     answer: ''
   }
+
+  addCard = () => {
+    const { deckId } = this.props.navigation.state.params
+    const { question, answer } = this.state
+
+    if (question !== '' && answer !== '') {
+      addCardToDeck(deckId, {
+        question,
+        answer
+      })
+      .then(() => this.toHome())
+    }
+  }
+
+  toHome = () => {
+    this.props.navigation.navigate(
+      'Decks', { update: 'yes' }
+    )
+	}
 
   render() {
     const { deckId, title } = this.props.navigation.state.params
@@ -33,7 +53,7 @@ export default class NewQuestion extends Component {
           value={this.state.text}
           placeholder="Answer"
         />
-        <TouchableOpacity style={styles.buttonDark}>
+        <TouchableOpacity style={styles.buttonDark} onPress={() => this.addCard()}>
           <Text style={styles.buttonTextLight}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
